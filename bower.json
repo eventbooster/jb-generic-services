@@ -1,6 +1,10 @@
 {
 	"name"			: "jb-generic-services"
-	, "version"		: "0.0.1"
+	, "version"		: "0.0.2"
+	, "main"		: [
+		  "src/jb-session.js"
+		, "src/jb-user.js"
+	]
 	, "dependencies": {
 		"angular"	: ">=1.4.0"
 	}
