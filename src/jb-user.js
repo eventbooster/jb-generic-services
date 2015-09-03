@@ -54,7 +54,7 @@
 				return true;
 
 			}, function( err ) {
-				return $q.reject( new Error( 'Could not login: ' + err.message ) );
+				return $q.reject( new Error( 'UserService: Could not login: ' + err.message ) );
 			} );
 
 
@@ -65,8 +65,44 @@
 		* Logout user: 
 		* - remove all data from user's scope in the session
 		* - delete accessToken from server
+		*
+		* Returns a promise.
 		*/
 		User.prototype.logout = function() {
+
+			console.log( 'UserService: Logout user' );
+
+			var accessToken = SessionService.get( 'accessToken' );
+
+			if( accessToken ) {
+				return APIWrapperService.request( {
+					method				: 'DELETE'
+					, url				: '/accessToken/' + accessToken
+				} )
+
+				// accessToken must be removed from Session _after_ it was deleted from server. If it's not in the Session
+				// any more while we make the DELETE request, the user is not authenticated and may therefore not remove 
+				// his or her own accessToken.
+				.then( function() {
+					console.log( 'UserService: Removed accessToken from server' );
+					SessionService.logout();
+					return true;
+				}, function( err ) {
+					console.error( 'UserService: Could not remove accessToken from server: ' + JSON.stringify( err ) );
+					SessionService.logout();
+					return $q.reject( err );
+				} );
+			}
+			else {
+
+				SessionService.logout();
+
+				var deferred = $q.defer();
+				deferred.resolve();
+				return deferred.promise;
+
+			}
+
 
 		};
 
@@ -76,6 +112,11 @@
 		* – is not validated against the server.
 		*/
 		User.prototype.isAuthenticated = function() {
+
+			if( SessionService.get( 'accessToken' ) ) {
+				return true;
+			}
+			return false;
 
 		};
 
