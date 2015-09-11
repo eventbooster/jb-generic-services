@@ -1,6 +1,6 @@
 {
 	"name"			: "jb-generic-services"
-	, "version"		: "0.0.3"
+	, "version"		: "0.1.0"
 	, "main"		: [
 		  "src/jb-session.js"
 		, "src/jb-user.js"

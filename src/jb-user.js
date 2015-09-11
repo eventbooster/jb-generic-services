@@ -10,7 +10,7 @@
 	'use strict';
 
 	angular
-	.module( 'jb.user', [ 'eb.apiWrapper', 'jb.session' ] )
+	.module( 'jb.user', [ 'jb.apiWrapper', 'jb.session' ] )
 	.factory( 'UserService', [ '$q', 'SessionService', 'APIWrapperService', function( $q, SessionService, APIWrapperService ) {
 
 
