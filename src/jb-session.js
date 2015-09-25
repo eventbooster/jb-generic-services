@@ -131,7 +131,7 @@
 			}
 
 			if( !isScopeValid( scope ) ) {
-				throw new Error( 'Session: Your scope \'' + scope + '\' is not valid. Please use ' + validScopes.join( ' or ' ) );
+				throw new Error( 'Session: The scope \'' + scope + '\' is not valid. Please use scopes ' + validScopes.map( function( item ) { return '\'' + item + '\''; } ).join( ' or ' ) + '.' );
 			}
 
 			if( expirationDate && !createValidDate( expirationDate ) ) {
@@ -194,6 +194,11 @@
 			var parsedData;
 			try {
 				parsedData = JSON.parse( result );
+
+				// null is default value if date is not set, see set method
+				if( parsedData.expirationDate !== null ) {
+					parsedData.expirationDate = new Date( parsedData.expirationDate );
+				}
 			}
 			catch( e ) {
 				throw new Error( 'Session: Data \'' + result + '\'could not be parsed from JSON.' );
