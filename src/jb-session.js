@@ -110,7 +110,7 @@
 		//
 
 		var Session = function() {
-			if( !supportsLocalStorage ) {
+			if( !supportsLocalStorage() ) {
 				throw new Error( 'Session: Your browser does not support the HTML5 localStorage object. Please update your browser or enable localStorage support.' );
 			}
 		};

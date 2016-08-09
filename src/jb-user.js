@@ -75,6 +75,7 @@
 			var accessToken = SessionService.get( 'accessToken' );
 
 			if( accessToken ) {
+
 				return APIWrapperService.request( {
 					method				: 'DELETE'
 					, url				: '/accessToken/' + accessToken
@@ -92,6 +93,7 @@
 					SessionService.logout();
 					return $q.reject( err );
 				} );
+				
 			}
 			else {
 

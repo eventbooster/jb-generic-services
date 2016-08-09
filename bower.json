@@ -1,12 +1,12 @@
 {
 	"name"			: "jb-generic-services"
-	, "version"		: "0.1.1"
 	, "main"		: [
 		  "src/jb-session.js"
 		, "src/jb-user.js"
 	]
 	, "dependencies": {
 		"angular"	: ">=1.4.0"
+		, "jb-api-wrapper": "0.4.x"
 	}
 	, "devDependencies": {
 		"angular-mocks": ">=1.4.0"
