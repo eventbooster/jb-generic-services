@@ -6,7 +6,7 @@
 	]
 	, "dependencies": {
 		"angular"	: ">=1.4.0"
-		, "jb-api-wrapper": "0.4.x"
+		, "jb-api-wrapper": "0.5.x"
 	}
 	, "devDependencies": {
 		"angular-mocks": ">=1.4.0"
